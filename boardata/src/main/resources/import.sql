@@ -79,6 +79,7 @@ INSERT INTO result (round_id, user_id, nature_id, score) VALUES (4, 4, 15, 50)
 
 INSERT INTO friendship (active, date, friend_id, requester_id) VALUES (1, '2022-09-22', 2, 1)
 INSERT INTO friendship (active, date, friend_id, requester_id) VALUES (1, '2022-09-22', 3, 1)
+INSERT INTO friendship (active, date, friend_id, requester_id) VALUES (0, '2022-09-22', 4, 1)
 
 INSERT INTO friendship (active, date, friend_id, requester_id) VALUES (1, '2022-09-22', 2, 4)
 INSERT INTO friendship (active, date, friend_id, requester_id) VALUES (1, '2022-09-22', 3, 4)

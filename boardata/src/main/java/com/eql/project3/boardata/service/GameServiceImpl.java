@@ -15,11 +15,12 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public void saveGame(Game game) {
-
+        gameRepository.save(game);
     }
 
     @Override
     public List<Game> findAllGames() {
-        return null;
+
+        return gameRepository.findAll();
     }
 }
