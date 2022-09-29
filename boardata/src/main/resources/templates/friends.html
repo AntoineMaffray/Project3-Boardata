@@ -24,6 +24,13 @@
                 </li>
             </ul>
         </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent2">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/friends}">Logout</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>
 <div class="container">
@@ -32,18 +39,15 @@
     </div>
     <table class="table table-bordered table-hover">
         <thead class="table-dark">
-        <tr th:each=user : ${users}>
-            <th th:text="${user.firstname}"></th>
+        <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each = "user : ${users}">
             <td th:text = "${user.firstname}"></td>
             <td th:text = "${user.name}"></td>
-            <td th:text = "${user.email}"></td>
-            <td th:text = "${user.address}"></td>
-            <td th:text = "${user.phoneNumber}"></td>
-            <td th:text = "${user.registerDate}"></td>
         </tr>
         </tbody>
     </table>

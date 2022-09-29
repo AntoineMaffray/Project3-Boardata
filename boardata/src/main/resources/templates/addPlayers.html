@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sélectionner un joueur</title>
+    <link crossorigin="anonymous"/>
+</head>
+<body>
+<div class="container" margin="2rem">
+    <h5>Liste des joueurs</h5>
+
+    <table class="table table-striped table-responsive-md">
+        <thead>
+        <tr>
+            <th scope="col">Liste des joueurs</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="player: ${players}">
+            <td th:text="${player.name}"/>
+            <td th:text="${player.firstname}"/>
+            <td><a th:href="@{/addPlayer/{id}(id=${player.getId()})}" class="btn btn-outline-warning btn-sm">Ajouter</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<button>
+    <a class="nav-link active" aria-current="page" th:href="@{/showResult}">Valider le score</a>
+</button>
+</body>
+</html>
+

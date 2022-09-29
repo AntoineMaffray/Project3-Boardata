@@ -24,10 +24,11 @@ public class SpringSecurity {
 
         http.csrf().disable()
                 .authorizeHttpRequests()
+                .antMatchers("/**").permitAll()
                 .antMatchers("/register/**").permitAll()
                 .antMatchers("/index").permitAll()
-                .antMatchers("/users").hasRole("USER")
-                .antMatchers("/users").hasRole("ADMIN")
+                .antMatchers("/users").hasAnyRole("AD%IN", "USER")
+//                .antMatchers("/users").hasRole("USER")
                 .and()
                 .formLogin(
                         form -> form

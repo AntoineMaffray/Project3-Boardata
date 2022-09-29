@@ -4,8 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -18,14 +18,13 @@ public class Round {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date matchDate;
+    private LocalDate matchDate;
 
     @OneToMany(mappedBy = "round")
     private List<Result> results = new ArrayList<>();
 
-    @OneToOne
-    @JoinColumn (name = "Game_id", referencedColumnName = "gameId")
+    @ManyToOne
+    @JoinColumn (name = "game_id")
     private Game game;
 
 }

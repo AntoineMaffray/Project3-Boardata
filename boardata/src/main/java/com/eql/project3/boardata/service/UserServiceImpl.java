@@ -1,6 +1,7 @@
 package com.eql.project3.boardata.service;
 
 
+import com.eql.project3.boardata.models.Game;
 import com.eql.project3.boardata.models.Role;
 import com.eql.project3.boardata.models.User;
 import com.eql.project3.boardata.repository.RoleRepository;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -53,6 +55,19 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public User findUserByID(Long id) {
+        Optional<User> optional = userRepository.findById(id);
+        User user = null;
+
+        if (optional.isPresent()){
+            user = optional.get();
+        } else {
+            throw new RuntimeException("Employee not found for id : " + id);
+        }
+        return user;
+    }
+
+    @Override
     public List<User> findAllUsers() {
 
         return  userRepository.findAll();
@@ -62,6 +77,11 @@ public class UserServiceImpl implements UserService{
 //        return users.stream().collect(Collectors.toList());
 
 //        return new ArrayList<>(users);
+    }
+
+    @Override
+    public List<User> findMyFriends() {
+        return null;
     }
 
 }

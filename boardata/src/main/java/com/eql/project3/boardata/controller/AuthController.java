@@ -52,12 +52,6 @@ public class AuthController {
         return "users";
     }
 
-    @GetMapping("/fillScore")
-    public String participants(Model model) {
-        List<User> users = userService.findAllUsers();
-        model.addAttribute("users", users);
-        return "participants";
-    }
 
     @GetMapping("/login")
     public String login () {

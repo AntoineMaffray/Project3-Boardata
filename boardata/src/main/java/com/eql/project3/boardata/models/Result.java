@@ -1,8 +1,13 @@
 package com.eql.project3.boardata.models;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "result")
 public class Result {
 

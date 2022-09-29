@@ -1,8 +1,15 @@
 package com.eql.project3.boardata.models;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "game")
 public class Game {
 
@@ -14,6 +21,6 @@ public class Game {
 
     private boolean typeCalc;
 
-    @OneToOne(mappedBy = "game")
-    private Round round;
+    @OneToMany(mappedBy = "game")
+    private List<Round> rounds = new ArrayList<>();
 }

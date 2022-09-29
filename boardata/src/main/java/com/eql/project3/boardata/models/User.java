@@ -36,8 +36,7 @@ public class User {
 
     private String password;
 
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date registerDate;
+    private LocalDate registerDate;
 
     @OneToMany(mappedBy = "requester"
     )
@@ -58,7 +57,7 @@ public class User {
     )
     private List<Role> roles = new ArrayList<>();
 
-    public User(String name, String firstname, String email, String address, String phoneNumber, String password, Date registerDate, List<Role> roles) {
+    public User(String name, String firstname, String email, String address, String phoneNumber, String password, LocalDate registerDate, List<Role> roles) {
         this.name = name;
         this.firstname = firstname;
         this.email = email;

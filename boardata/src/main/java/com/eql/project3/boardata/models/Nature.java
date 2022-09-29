@@ -1,8 +1,13 @@
 package com.eql.project3.boardata.models;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "nature")
 public class Nature {
 
@@ -10,23 +15,23 @@ public class Nature {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long natureId;
 
-    private String civilian;
+    private int civilian;
 
-    private String war;
+    private int war;
 
-    private String science;
+    private int science;
 
-    private String business;
+    private int business;
 
-    private String guilds;
+    private int guilds;
 
-    private String money;
+    private int money;
 
-    private String wonder;
+    private int wonder;
 
-    private String agora;
+    private int agora;
 
-    private String cities;
+    private int cities;
 
     @OneToOne (mappedBy = "nature")
     private Result result;

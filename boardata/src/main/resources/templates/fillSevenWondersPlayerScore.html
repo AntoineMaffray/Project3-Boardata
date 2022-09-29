@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Enregistrer le score</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+</head>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/index}">Registration and Login System</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/logout}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<body>
+<div class="container">
+    <div th:if="${param.success}">
+        <div class="alert alert-info">
+            Vous avez bien enregistré le score
+        </div>
+    </div>
+    <h1>Enregistrer le score</h1>
+    <form action="#" th:action="@{/saveNature}" th:object="${nature}" method="POST">
+        <input type="text" th:field="*{civilian}" placeholder="Civil" class="form-control mb-4 col-4">
+        <input type="text" th:field="*{war}" placeholder="Guerre" class="form-control mb-4 col-4">
+        <input type="text" th:field="*{science}" placeholder="Science" class="form-control mb-4 col-4">
+        <input type="text" th:field="*{business}" placeholder="Commerce" class="form-control mb-4 col-4">
+        <input type="text" th:field="*{guilds}" placeholder="Guildes" class="form-control mb-4 col-4">
+        <input type="text" th:field="*{money}" placeholder="Trésor" class="form-control mb-4 col-4">
+        <input type="text" th:field="*{wonder}" placeholder="Merveille" class="form-control mb-4 col-4">
+        <input type="text" th:field="*{agora}" placeholder="Agora" class="form-control mb-4 col-4">
+        <input type="text" th:field="*{cities}" placeholder="Cities" class="form-control mb-4 col-4">
+        <button type="submit" class="btn btn-info col-2">Enregistrer le score</button>
+    </form>
+</div>
+<div>
+    <a class="btn btn-primary" aria-current="page" th:href="@{/addPlayers}" >Ajouter le score d'un autre joueur</a>
+</div>
+</body>
+</html>
