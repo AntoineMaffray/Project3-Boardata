@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr"xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <title>Choose a Game - BoardData</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+
+<body>
+
+
+
+<header class="header-area">
+    <div class="container container-custom">
+        <div class="row">
+            <div class="col-12">
+                <!-- ***** MENU ***** -->
+                <nav class="navbar navbar-expand-lg main-nav">
+                    <!-- ***** LOGO ***** -->
+                    <a th:href="@{/connectedIndex}" class="logo">
+                        BOARD<span class="rotate-text">D</span>ATA
+                    </a>
+                    <!-- ***** LOGO END ***** -->
+                    <!-- ***** MENU ***** -->
+                    <ul class="nav navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Ajouter un score
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" th:href="@{/chooseGame}">Choisir un jeu</a></li>
+                                <li><a class="dropdown-item" th:href="@{/showNewGameForm}">Ajouter un jeu</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Amis
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                                <li><a class="dropdown-item" th:href="@{/friends}">Mes amis</a></li>
+                                <li><a class="dropdown-item" th:href="@{/addFriends}">Ajouter des amis</a></li>
+                                <li><a class="dropdown-item" th:href="@{/pendingFriends}">Demandes en attente</a></li>
+                                <li><a class="dropdown-item" th:href="@{/askedFriends}">Demandes reçues</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Statistiques
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                                <li><a class="dropdown-item" th:href="@{/myStats}">Mes stats</a></li>
+                                <li><a class="dropdown-item" th:href="@{/friendsData}">Stats des amis</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Aide
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                                <li><a class="dropdown-item" th:href="@{/help}">Fonctionnement Bordata</a></li>
+                            </ul>
+                        </li>
+                        <li><a th:href="@{/login}">Se déconnecter<img src="https://imgs.search.brave.com/pEJ8_8PZkxOBVsUXSmm-DaklMj99mdW9szfvmrdx3YI/rs:fit:512:512:1/g:ce/aHR0cHM6Ly91Y2Vt/LmVkdS5uaS93cC1j/b250ZW50L3VwbG9h/ZHMvMjAxOC8xMi9k/ZWZhdWx0LWF2YXRh/ci5wbmc" alt=""></a></li>
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                </nav>
+                <!-- ***** MENU END ***** -->
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-content">
+                <div class="card-wrapper form">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="heading-section text-center">
+                                <h4><em>Résultats</em></h4>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-sm-12">
+                                    <div class="item">
+                                        <div class="search-inputs">
+                                            <table class="table table-borderless table-hover">
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col">Jeux</th>
+                                                    <th scope="col">Nombre de parties jouées</th>
+                                                    <th scope="col">Nombre de victoires</th>
+                                                    <th scope="col">Pourcentage de victoires</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr th:each="data: ${myData}">
+                                                    <td th:text="${data.getGameName()}"></td>
+                                                    <td th:text="${data.getParticipation()}"></td>
+                                                    <td th:text="${data.getWin()}"></td>
+                                                    <td th:text="${data.getPercentage()}"></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- Scripts -->
+<!-- Bootstrap core JavaScript -->
+<script src="../static/vendor/jquery/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
+<script src="../static/js/custom.js"></script>
+
+
+</body>
+
+</html>

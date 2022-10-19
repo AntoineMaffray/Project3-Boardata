@@ -1,86 +1,133 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
->
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <title>S'identifier</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-          rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-          crossorigin="anonymous">
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <title>Login - BoardData</title>
+  
+  <!-- Bootstrap core CSS -->
+  <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+  
+  <!-- Additional CSS Files -->
+  <link rel="stylesheet" href="../static/css/fontawesome.css">
+  <link rel="stylesheet" href="../static/css/style.css">
+  <link rel="stylesheet" href="../static/css/owl.css">
+  <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
 </head>
+
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" th:href="@{/index}">Registration and Login System</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/register}">Register</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-<br /><br />
-<div class="container">
+  
+    <!-- ***** HEADER ***** -->
+    <header class="header-area header-sticky">
+      <div class="container container-custom">
+          <div class="row">
+              <div class="col-12">
+                  <nav class="main-nav">
+                      <!-- ***** LLOGO ***** -->
+                      <a th:href="@{/index}" class="logo">
+                        BOAR<span class="rotate-text">D</span>ATA
+                      </a>
+                      <!-- ***** LOGO END ***** -->
+    
+      
+                      <!-- ***** MENU ***** -->
+<!--                      <ul class="nav">-->
+<!--                          <li><a th:href="@{/index}" class="active">Accueil</a></li>-->
+<!--                          <li><a th:href="@{/chooseGame}">Liste des jeux</a></li>-->
+<!--                          <li><a th:href="@{/friends}">Joueurs</a></li>-->
+<!--                          <li><a th:href="@{/login}">Se connecter<img src="https://imgs.search.brave.com/pEJ8_8PZkxOBVsUXSmm-DaklMj99mdW9szfvmrdx3YI/rs:fit:512:512:1/g:ce/aHR0cHM6Ly91Y2Vt/LmVkdS5uaS93cC1j/b250ZW50L3VwbG9h/ZHMvMjAxOC8xMi9k/ZWZhdWx0LWF2YXRh/ci5wbmc" alt=""></a></li>-->
+<!--                      </ul>   -->
+                      <a class='menu-trigger'>
+                          <span>Menu</span>
+                      </a>
+                      <!-- ***** MENU END ***** -->
+                  </nav>
+              </div>
+          </div>
+      </div>
+    </header>
+    <!-- ***** HEADER END***** -->
+  
+  <div class="container">
     <div class="row">
-        <div class="col-md-6 offset-md-3">
-
-            <div th:if="${param.error}">
-                <div class="alert alert-danger">Invalid Email or Password</div>
-            </div>
-            <div th:if="${param.logout}">
-                <div class="alert alert-success"> You have been logged out.</div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="text-center">Login Form</h2>
+      <div class="col-lg-12">
+        <div class="page-content">
+          
+          <div class="card-wrapper form">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="heading-section text-center">
+                  <h4><em>Connectez</em> Vous</h4>
                 </div>
-                <div class="card-body">
-                    <form
-                            method="post"
-                            role="form"
-                            th:action="@{/login}"
-                            class="form-horizontal"
-                    >
-                        <div class="form-group mb-3">
-                            <label class="control-label"> Email</label>
-                            <input
-                                    type="text"
-                                    id="username"
-                                    name="username"
-                                    class="form-control"
-                                    placeholder="Enter email address"
-                            />
+                <div class="row">
+                  <div class="col-lg-12 col-sm-12">
+                    <div class="item">
+                      <div class="search-inputs">
+                        <form id="search"  method="post" role="form" th:action="@{/login}">
+                          <div class="form-group mb-3">
+                            <label class="form-label">Mail</label>
+                            <input class="form-control" type="text" id="username" name="username" placeholder="Enter email address"/>
+                          </div>
+                          
+                          <div class="form-group mb-5">
+                            <label class="form-label">Mot de passe</label>
+                            <input class="form-control password-field" type="password" id="password" name="password" placeholder="Enter password"/>
+                          </div>
+                          <div class="mb-5" th:if="${param.error}">
+                            <div class="text-danger">Email ou mot de passe invalide</div>
+                          </div>
+                          <div class="mb-5" th:if="${param.logout}">
+                            <div class="text-success">Vous avez été déconnecté</div>
                         </div>
-
-                        <div class="form-group mb-3">
-                            <label class="control-label"> Password</label>
-                            <input
-                                    type="password"
-                                    id="password"
-                                    name="password"
-                                    class="form-control"
-                                    placeholder="Enter password"
-                            />
-                        </div>
-                        <div class="form-group mb-3">
-                            <button type="submit" class="btn btn-primary" >Submit</button>
-                            <span> Not registered ?
-                                <a th:href="@{/register}">Register/Signup here</a>
-                            </span>
-                        </div>
-                    </form>
+                          <div class="form-group">
+                            <div class="main-button text-center mb-2">
+                              <button type="submit">Se connecter</button>
+                            </div>
+                            <div class="second-button text-center">
+                              <p>Pas encore inscrit ? <a class="text-white" th:href="@{/register}">Enregistre toi !</a></p>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+              </div>
             </div>
+          </div>
+          
+          
         </div>
+      </div>
     </div>
-</div>
-</body>
-</html>
+  </div>
+  
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+    
+    <!-- Scripts -->
+    <!-- Bootstrap core JavaScript -->
+    <script src="../static/vendor/jquery/jquery.min.js"></script>
+    <script src="../static/vendor/bootstrap/js/bootstrap.min.js"></script>
+    
+    <script src="../static/js/owl-carousel.js"></script>
+    <script src="../static/js/custom.js"></script>
+    
+    
+  </body>
+  
+  </html>
+  

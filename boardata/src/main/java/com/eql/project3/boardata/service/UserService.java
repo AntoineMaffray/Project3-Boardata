@@ -1,5 +1,6 @@
 package com.eql.project3.boardata.service;
 
+import com.eql.project3.boardata.models.Final;
 import com.eql.project3.boardata.models.Game;
 import com.eql.project3.boardata.models.User;
 
@@ -17,6 +18,12 @@ public interface UserService {
     List<User> findAllUsers();
 
     List<User> findMyFriends();
+
+    List<Final> getData(User user);
+
+    List<Final> getAllData(User user);
+
+    List<Final> getFinalAllData(User user);
 }
 
 

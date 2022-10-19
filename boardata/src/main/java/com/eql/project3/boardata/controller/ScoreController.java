@@ -3,6 +3,8 @@ package com.eql.project3.boardata.controller;
 import com.eql.project3.boardata.models.*;
 import com.eql.project3.boardata.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,13 +34,15 @@ public class ScoreController {
     @Autowired
     NatureService natureService;
 
-    User currentUser;
+    @Autowired
+    FriendshipService friendshipService;
 
     Round currentRound;
 
     Game currentGame;
 
     Result currentResult;
+
 
 
     @GetMapping("/chooseGame")
@@ -51,18 +55,6 @@ public class ScoreController {
         currentRound = null;
         return "chooseGame";
     }
-
-
-//    @PostMapping("setRound/{id}")
-//    public String addRound(@PathVariable(value = "id") Long id, Model model) {
-//        Game game = gameService.findGameByID(id);
-//        Round round = new Round();
-//        round.setGame(game);
-//        round.setMatchDate(new Date());
-//        roundService.saveRound(round);
-//        // Redirection vers page
-//        return "chooseGame";
-//    }
 
 
     @GetMapping("/showNewGameForm")
@@ -81,7 +73,7 @@ public class ScoreController {
 
 
     @GetMapping("/addRound/{id}")
-    public String addRound(@PathVariable(value = "id") Long id,  Model model){
+    public String addRound(@PathVariable(value = "id") Long id){
         currentGame = gameService.findGameByID(id);
         if (currentRound == null) {
             Round round = new Round();
@@ -93,12 +85,19 @@ public class ScoreController {
         return "redirect:/addPlayers";
     }
 
+
     @GetMapping("/addPlayers")
     public String choosePlayers(Model model){
-        List<User> players = new ArrayList<>();
-        players = userService.findAllUsers();
-        model.addAttribute("players", players);
-        return "addPlayers";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User connectedUser = userService.findUserByEmail(authentication.getName());
+        List<User> players = friendshipService.findMyFriends(connectedUser);
+        if (players.isEmpty()) {
+            return "dontHaveFriends";
+        } else {
+            players.add(connectedUser);
+            model.addAttribute("players", players);
+            return "addPlayers";
+        }
     }
 
 
@@ -135,8 +134,8 @@ public class ScoreController {
     public String saveResultSW(@ModelAttribute("nature") Nature nature) {
         natureService.saveNature(nature);
         currentResult.setNature(nature);
-        currentResult.setScore(
-                nature.getCivilian()
+        currentResult.setScore(nature.getWonder()
+                + nature.getCivilian()
                 + nature.getWar()
                 + nature.getScience()
                 + nature.getBusiness()
@@ -164,8 +163,25 @@ public class ScoreController {
 
     @GetMapping("/showResult")
     public String showResult (Model model) {
-        List<Result> resultats = currentRound.getResults();
-        model.addAttribute("results", resultats);
+        List<Result> results = currentRound.getResults();
+        List<Result> winnerResults = new ArrayList<>();
+        Result winnerResult = new Result();
+        winnerResult.setScore(0);
+        for (Result result : results) {
+            if (result.getScore() > winnerResult.getScore()) {
+                winnerResult = result;
+            }
+        }
+        for (Result result : results) {
+            if (result.getScore() == winnerResult.getScore()) {
+                winnerResults.add(result);
+            }
+        }
+        for (Result result : winnerResults) {
+            result.setWin(true);
+            resultService.saveResult(result);
+        }
+        model.addAttribute("results", results);
         return "showResult";
     }
 }

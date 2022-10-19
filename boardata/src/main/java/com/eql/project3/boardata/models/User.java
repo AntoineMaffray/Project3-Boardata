@@ -6,10 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -32,8 +30,6 @@ public class User {
 
     private String address;
 
-    private String phoneNumber;
-
     private String password;
 
     private LocalDate registerDate;
@@ -44,7 +40,7 @@ public class User {
 
     @OneToMany(mappedBy = "friend"
     )
-    private List<Friendship> friends = new ArrayList<>();
+    private List<Friendship> friendships = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
     private List<Result> results = new ArrayList<>();
@@ -62,7 +58,6 @@ public class User {
         this.firstname = firstname;
         this.email = email;
         this.address = address;
-        this.phoneNumber = phoneNumber;
         this.password = password;
         this.registerDate = registerDate;
         this.roles = roles;

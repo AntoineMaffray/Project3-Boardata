@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New Awesome Employee Form</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+</head>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/index}">Registration and Login System</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/logout}">Se déconnecter</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/chooseGame}">choisir un jeu</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/friends}">Mes amis</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<body>
+<div class="container">
+    <h1>Enregistrer un nouveau jeu</h1>
+    <form action="#" th:action="@{/saveGame}" th:object="${game}" method="POST">
+        <input type="text" th:field="*{name}" placeholder="Nom du jeu" class="form-control mb-4 col-4">
+        <div class="form-group">
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="option1" name="option1" class="custom-control-input" value=1 th:field="*{typeCalc}">
+                <label class="custom-control-label" for="option1">Le vainqueur a le plus de points</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="option2" name="option2" class="custom-control-input" value=0 th:field="*{typeCalc}">
+                <label class="custom-control-label" for="option2">Le vainqueur a le moins de points</label>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-info col-2">Enregistrer</button>
+    </form>
+</div>
+</body>
+</html>

@@ -1,10 +1,17 @@
 package com.eql.project3.boardata.models;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
+
 
 @Entity
 @Table(name = "friendship")
+@Getter
+@Setter
 public class Friendship {
 
     @Id
@@ -20,8 +27,7 @@ public class Friendship {
     @JoinColumn(referencedColumnName = "id")
     User friend;
 
-    @Temporal(javax.persistence.TemporalType.DATE)
-    Date date;
+    LocalDate date;
 
     @Column(nullable = false)
     boolean active;

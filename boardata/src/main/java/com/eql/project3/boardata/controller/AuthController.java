@@ -3,6 +3,8 @@ package com.eql.project3.boardata.controller;
 import com.eql.project3.boardata.models.User;
 import com.eql.project3.boardata.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -41,20 +44,33 @@ public class AuthController {
             model.addAttribute("user", user);
             return "/register";
         }
+        user.setRegisterDate(LocalDate.now());
         userService.saveUser(user);
         return "redirect:/register?success";
     }
 
-    @GetMapping("/users")
-    public String users(Model model) {
-        List<User> users = userService.findAllUsers();
-        model.addAttribute("users", users);
-        return "users";
-    }
 
+
+    @GetMapping("/connectedIndex")
+    public String connectedIndex() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User connectedUser = userService.findUserByEmail(authentication.getName());
+        if (connectedUser == null) {
+            return "index";
+        } else {
+            return "connectedIndex";
+        }
+    }
 
     @GetMapping("/login")
     public String login () {
         return "login";
     }
+
+    @GetMapping("/help")
+    public String help () {
+        return "help";
+    }
+
+
 }

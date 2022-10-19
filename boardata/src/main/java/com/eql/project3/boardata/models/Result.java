@@ -31,4 +31,7 @@ public class Result {
     @JoinColumn (name = "nature_id", referencedColumnName = "natureId")
     private Nature nature;
 
+    @Column (columnDefinition = "boolean default false")
+    private boolean win = false;
+
 }
